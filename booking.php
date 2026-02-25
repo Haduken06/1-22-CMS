@@ -721,7 +721,6 @@
     .nb-icon-wrap { width:30px; height:30px; border-radius:8px; background:#eff6ff; display:flex; align-items:center; justify-content:center; flex-shrink:0; margin-right:10px; font-size:0.72rem; color:var(--primary); }
     .nb-label { font-size:0.7rem; font-weight:600; color:#9ca3af; text-transform:uppercase; letter-spacing:.06em; margin-bottom:1px; }
     .nb-value { font-size:0.875rem; font-weight:700; color:#111827; word-break:break-word; }
-    .booking-code-chip { display:inline-flex; align-items:center; gap:6px; background:#1d4ed8; color:#fff; padding:4px 12px; border-radius:8px; font-size:0.9rem; font-weight:800; letter-spacing:.04em; }
 
     .cf-footer { background:#1e293b; border-radius:0 0 20px 20px; padding:18px 24px; display:flex; align-items:center; justify-content:space-between; gap:12px; }
     .cf-footer-note { font-size:0.78rem; color:#94a3b8; max-width:400px; line-height:1.5; }
@@ -858,7 +857,7 @@
           <div class="nb-detail-row"><div class="nb-icon-wrap"><i class="fas fa-envelope"></i></div><div><div class="nb-label">Email</div><div class="nb-value" id="cf-email">—</div></div></div>
           <div class="nb-detail-row"><div class="nb-icon-wrap"><i class="fas fa-tag"></i></div><div><div class="nb-label">Purpose</div><div class="nb-value" id="cf-purpose">—</div></div></div>
           <div class="nb-detail-row"><div class="nb-icon-wrap"><i class="fas fa-clock"></i></div><div><div class="nb-label">Time Slot</div><div class="nb-value" id="cf-time">—</div></div></div>
-         <div class="nb-detail-row"><div class="nb-icon-wrap"><i class="fas fa-hashtag"></i></div><div><div class="nb-label">Booking Code</div><div class="nb-value"><span class="booking-code-chip" id="cf-code">—</span></div></div></div>
+          <!-- Booking code row removed — code is only revealed on the receipt -->
         </div>
       </div>
     </div>
@@ -1183,6 +1182,7 @@ document.addEventListener('DOMContentLoaded', function () {
     if (start >= end)    { alert('End time must be later than start time.'); return; }
     if (!name || !phone) { alert('Name and phone number are required.'); return; }
 
+    // Code is generated here but only revealed on the receipt
     const code = genCode();
 
     document.getElementById('cf-date-label').textContent = displayDate.value;
@@ -1191,7 +1191,7 @@ document.addEventListener('DOMContentLoaded', function () {
     document.getElementById('cf-email').textContent   = email || '—';
     document.getElementById('cf-purpose').textContent = purpose || '—';
     document.getElementById('cf-time').textContent    = `${fmt12(start)} – ${fmt12(end)}`;
-    document.getElementById('cf-code').textContent    = `#${code}`;
+    // Booking code is intentionally NOT shown here — it appears only on the receipt
 
     function buildConfirmList(container, sourceContainer) {
       container.innerHTML = '';
